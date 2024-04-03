@@ -1,25 +1,19 @@
-from flask import Flask, jsonify, request,send_file
+from flask import Flask, jsonify, send_file
 import pandas as pd
 
 app = Flask(__name__)
 
 # Simulated data (replace with actual data loading logic)
-electricity_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [100, 120, 110]})
-gas_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [50, 60, 55]})
-water_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [20, 25, 22]})
+electricity_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [127000,124000,123000,122000,169000,229000,224000,225000,226000,187000,125000,129000]})
+gas_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [483470,482500,483400,445000,425000,317000,315000,314000,370000,475000,485000,480000]})
+water_data = pd.DataFrame({'Month': ['Jan', 'Feb', 'Mar','Avr','Mai','Juin','Juil','Aout','Sept','Oct','NoV','Dec'],'Consumption': [75,75,77,78,77,80,82,85,82,81,86,75]})
+
+# Define unit costs
+unit_cost = {'electricity': 0.27, 'gas': 0.0913, 'water': 4.34}
 
 @app.route("/",methods=['GET'])
 def get_default():
     return jsonify({'result': "App Running..."})
-
-# Renvoie l'image
-@app.route('/get_image')
-def get_image():
-    # Ici, vous pouvez ajouter votre logique pour récupérer l'image à afficher
-    image_path = 'C:\\Users\\dgama\Desktop\\testback\\bird.png'  # Changer cela avec le chemin de votre image
-    # Renvoie l'image
-    return send_file(image_path, mimetype='image/png')
-
 
 @app.route('/electricity')
 def get_electricity_data():
