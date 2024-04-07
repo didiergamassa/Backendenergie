@@ -1,1 +1,1 @@
-web: gunicorn app: backenergie
+web: gunicorn app: app
